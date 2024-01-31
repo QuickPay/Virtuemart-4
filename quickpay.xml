@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension version="1.0" type="plugin" group="vmpayment" method="upgrade">
+    <name>Qucikpay</name>
+    <creationDate>Jan 2024</creationDate>
+    <author>Quickpay</author>
+    <authorUrl>http://www.quickpay.dk</authorUrl>
+    <copyright>Copyright (C)2024 Quickpay</copyright>
+    <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
+    <version>1.00</version>
+    <description><![CDATA[<a href="http://quickpay.dk" target="_blank">Quickpay</a> payment gateway.]]>
+    </description>
+
+    <files>
+	<filename plugin="quickpay">quickpay.php</filename>
+    <filename plugin="quickpay">quickpay_helper.php</filename>
+
+    </files>
+    <languages>
+	<language tag="en-GB">en-GB.plg_vmpayment_quickpay.ini</language>
+	<language tag="da-DK">da-DK.plg_vmpayment_quickpay.ini</language>
+    </languages>
+    <vmconfig>
+        <fields name="params">
+    <fieldset name="payment" addpath="/administrator/components/com_virtuemart/fields">
+
+
+         <field type="text" name="quickpay_md5_key"  size="50" label="VMPAYMENT_QUICKPAY_PAYMENT_WINDOW_API_KEY"
+             default="" description="VMPAYMENT_QUICKPAY_PAYMENT_WINDOW_API_KEY_DESC" />
+
+         <field type="text" name="quickpay_private_key"  size="50" label="VMPAYMENT_QUICKPAY_PAYMENT_WINDOW_PRIVATE_KEY"
+             default="" description="VMPAYMENT_QUICKPAY_PAYMENT_WINDOW_PRIVATE_KEY_DESC" />
+
+	 <field type="text" name="quickpay_merchant"  size="50" label="VMPAYMENT_QUICKPAY_MERCHANT"
+             default="" description="VMPAYMENT_QUICKPAY_MERCHANT_DESC" />
+
+
+ <field type="text" name="quickpay_agreement_id"  size="50" label="VMPAYMENT_AGREEMENT_ID"
+             default="" description="VMPAYMENT_AGREEMENT_ID_DESC" />
+
+
+              <field name="quickpay_subscription" type="list" default="0" label="VMPAYMENT_QUICKPAY_SUBSCRIPTION" description="VMPAYMENT_QUICKPAY_SUBSCRIPTION_DESC">
+	    <option value="0">VMPAYMENT_QUICKPAY_STANDARD_PAYMENT</option>
+	    <option value="1">VMPAYMENT_QUICKPAY_SUBSCRIPTION</option>
+	</field>
+
+
+         <field type="text" name="quickpay_description"  size="50" label="VMPAYMENT_DESCRIPTION"
+             default="" description="VMPAYMENT_DESCRIPTION_DESC" />
+
+
+
+              <field name="quickpay_autocapture" type="radio" default="0" label="VMPAYMENT_QUICKPAY_AUTOCAPTURE" description="VMPAYMENT_QUICKPAY_AUTOCAPTURE_DESC">
+	    <option value="0">COM_VIRTUEMART_NO</option>
+	    <option value="1">COM_VIRTUEMART_YES</option>
+	</field>
+
+
+         <field name="quickpay_autofee" type="radio" default="0" label="VMPAYMENT_QUICKPAY_AUTOFEE" description="VMPAYMENT_QUICKPAY_AUTOFEE_DESC">
+	    <option value="0">COM_VIRTUEMART_NO</option>
+	    <option value="1">COM_VIRTUEMART_YES</option>
+	</field>
+
+
+
+         <field type="text" name="quickpay_cardtypelock"  size="50" label="VMPAYMENT_METHOD"
+             default="" description="VMPAYMENT_METHOD_DESC" />
+
+
+              <field type="text" name="prefix"  size="50" label="VMPAYMENT_QUICKPAY_PREFIX"
+             default="" description="VMPAYMENT_QUICKPAY_PREFIX_DESC" />
+
+              <field type="text" name="quickpay_branding_id"  size="50" label="VMPAYMENT_BRANDING_ID"
+             default="" description="VMPAYMENT_BRANDING_ID_DESC" />
+
+
+                <field type="text" name="quickpay_google_analytics_tracking_id"  size="50" label="VMPAYMENT_GOOGLE_ANALYTICS_TRACKING_ID"
+             default="" description="VMPAYMENT_GOOGLE_ANALYTICS_TRACKING_ID_DESC" />
+
+
+              <field type="text" name="quickpay_google_analytics_client_id"  size="50" label="VMPAYMENT_GOOGLE_ANALYTICS_CLIENT_ID"
+             default="" description="VMPAYMENT_GOOGLE_ANALYTICS_CLIENT_ID_DESC" />
+
+
+
+
+              <field type="text" name="quickpay_paii_product_id"  size="50" label="VMPAYMENT_PAII_PRODUCT_ID"
+             default="P03" description="VMPAYMENT_PAII_PRODUCT_ID_DESC" />
+
+
+          <field type="list" name="quickpay_paii_category"  size="50" label="VMPAYMENT_PAII_CATEGORY"
+             default="" description="VMPAYMENT_PAII_CATEGORY_DESC" >
+
+                 <option value="0">Select Category</option>
+                 <option value="SC00">Traditional mobile content (e.g. ringtones, wallpapers, logos and animation)</option>
+                 <option value="SC01">Video (streaming and download of TV/video broadcasts and clips)</option>
+                 <option value="SC02">Erotic and other adult content (16xx only)</option>
+                 <option value="SC03">Music - full length music tracks (not ringtones)</option>
+                 <option value="SC04">Audio (streaming and download of radio broadcasts and podcasts, sound books and other audio-based content, excluding full length music tracks)</option>
+                 <option value="SC05">Games (mobile games incl. multiplayer and cross platform interaction gaming)</option>
+                 <option value="SC06">Chat And Dating</option>
+                 <option value="SC07">Competitions, voting’s And polls (all media types, including interaction with TV/radio programs)</option>
+                 <option value="SC08">'mCommerce (payment for services not delivered to mobile e.g. web service access, parking payment and general m-commerce payment for physical goods)</option>
+                 <option value="SC09">News And information (news media, directories, seek And find and the like)</option>
+                 <option value="SC10">Charity and donations</option>
+                 <option value="SC11">B2B (telemetric and other business to business related services)</option>
+                 <option value="SC12">Other</option>
+                 <option value="SC13">Kiosks and grocery stores</option>
+                 <option value="SC14">Convenience store, food and non-food</option>
+                 <option value="SC15">Wine And Tobacco</option>
+                 <option value="SC16">Pharmacy And drug stores</option>
+                 <option value="SC17">Clothes, shoes and apparel</option>
+                 <option value="SC18">House, garden and home</option>
+                 <option value="SC19">Books, stationery And Office Supplies</option>
+                 <option value="SC20">Electronics, Computer And Software</option>
+                 <option value="SC21">Other consumer goods</option>
+                 <option value="SC22">Hotel, vacation, restaurant, cafés, bars, canteens, catering</option>
+                 <option value="SC24">Communication and connectivity not from phone bill</option>
+                 <option value="SC25">Public transport</option>
+                 <option value="SC26">Private transport</option>
+                 <option value="SC27">Travel (air travel, travel with accommodation</option>
+                 <option value="SC28">Communication and connectivity from the phone bill</option>
+                 <option value="SC29">Services</option>
+                 <option value="SC30">Leisure and Entertainment, non-digital</option>
+
+                   <option value="SC31">Lottery and other gambling</option>
+                     <option value="SC32">General interests and hobby (exercise, sports, out-door activity, associations and organizations</option>
+                       <option value="SC33">Personal care (hairdresser, beauty, tanning and health</option>
+                         <option value="SC34">Erotic and adult products</option>
+
+
+
+
+                </field>
+
+
+
+
+
+
+
+	<field name="status_pending" type="vmorderstate" scope="com_virtuemart" default="P" label="VMPAYMENT_QUICKPAY_STATUS_PENDING" description="VMPAYMENT_QUICKPAY_STATUS_PENDING_DESC" />
+	<field name="status_success" type="vmorderstate" scope="com_virtuemart" default="C" label="VMPAYMENT_QUICKPAY_STATUS_SUCCESS" description="VMPAYMENT_QUICKPAY_STATUS_SUCCESS_DESC" />
+	<field name="status_canceled" type="vmorderstate" scope="com_virtuemart" default="X" label="VMPAYMENT_QUICKPAY_STATUS_FAILED" description="VMPAYMENT_QUICKPAY_STATUS_FAILED_DESC" />
+
+    <field type="text" name="quickpay_thirdpartyapi"  size="200" label="VMPAYMENT_QUICKPAY_THIRDPARTYAPI" default="" description="VMPAYMENT_QUICKPAY_THIRDPARTYAPI_DESC" />
+    <field type="radio" name="quickpay_round_order_amount" default="0" label="VMPAYMENT_QUICKPAY_ROUNDORDER" description="VMPAYMENT_QUICKPAY_ROUNDORDER_DESC">
+            <option value="0">COM_VIRTUEMART_NO</option>
+            <option value="1">COM_VIRTUEMART_YES</option>
+    </field>
+
+
+         </fieldset>
+        </fields>
+    </vmconfig>
+
+</extension>
