@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension version="1.0" type="plugin" group="vmpayment" method="upgrade">
-    <name>Qucikpay</name>
+    <name>Quickpay</name>
     <creationDate>Jan 2024</creationDate>
     <author>Quickpay</author>
     <authorUrl>http://www.quickpay.dk</authorUrl>
