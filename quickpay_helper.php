@@ -2,7 +2,6 @@
 /**
 * Quickpay helper for accessing the Quickpay api.
 *
-* (c)2016 - www.stokersoft.com
 */
 
 class QuickpayHelper {
