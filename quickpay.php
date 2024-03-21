@@ -210,7 +210,70 @@ class plgVMPaymentQuickpay extends vmPSPlugin
 
         $helper = new QuickpayHelper();
         $helper->setApiKey($method->quickpay_md5_key);
-        $id = $helper->qpCreatePayment($order_number, $currency_code_3);
+        $paymentsData = [
+            'order_id' => $order_number,
+            'currency' => $currency_code_3
+        ];
+
+        // Send data to quickpay
+        if ($method->quickpay_address == '1') {
+            $bt = $order['details']['BT'];
+            $paymentsData['invoice_address'] = [
+                'name' => $bt->first_name . ($bt->middle_name !== null ?? ' ' . $bt->middle_name) . ' ' . $bt->last_name,
+                'company' => $bt->company,
+                'street' => $bt->address_1,
+                'city' => $bt->city,
+                'zip_code' => $bt->zip,
+                'country_code' => shopfunctions::getCountryByID($bt->virtuemart_country_id,'country_3_code'),
+                'region' => shopfunctions::getStateByID($bt->virtuemart_state_id),
+                'phone_number' => $bt->phone_1,
+                'mobile_number' => $bt->phone_2,
+                'email' => $bt->email
+            ];
+        } elseif($method->quickpay_address == '2') {
+            $st = $order['details']['ST'];
+            $paymentsData['shipping_address'] = [
+                'name' => $st->first_name . ($st->middle_name !== null ?? ' ' . $st->middle_name) . ' ' . $st->last_name,
+                'company' => $st->company,
+                'street' => $st->address_1,
+                'city' => $st->city,
+                'zip_code' => $st->zip,
+                'country_code' => shopfunctions::getCountryByID($st->virtuemart_country_id,'country_3_code'),
+                'region' => shopfunctions::getStateByID($st->virtuemart_state_id),
+                'phone_number' => $st->phone_1,
+                'mobile_number' => $st->phone_2,
+                'email' => $st->email
+            ];
+        } elseif($method->quickpay_address == '3') {
+            $bt = $order['details']['BT'];
+            $paymentsData['invoice_address'] = [
+                'name' => $bt->first_name . ($bt->middle_name !== null ?? ' ' . $bt->middle_name) . ' ' . $bt->last_name,
+                'company' => $bt->company,
+                'street' => $bt->address_1,
+                'city' => $bt->city,
+                'zip_code' => $bt->zip,
+                'country_code' => shopfunctions::getCountryByID($bt->virtuemart_country_id,'country_3_code'),
+                'region' => shopfunctions::getStateByID($bt->virtuemart_state_id),
+                'phone_number' => $bt->phone_1,
+                'mobile_number' => $bt->phone_2,
+                'email' => $bt->email
+            ];
+
+            $st = $order['details']['ST'];
+            $paymentsData['shipping_address'] = [
+                'name' => $st->first_name . ($st->middle_name !== null ?? ' ' . $st->middle_name) . ' ' . $st->last_name,
+                'company' => $st->company,
+                'street' => $st->address_1,
+                'city' => $st->city,
+                'zip_code' => $st->zip,
+                'country_code' => shopfunctions::getCountryByID($st->virtuemart_country_id,'country_3_code'),
+                'region' => shopfunctions::getStateByID($st->virtuemart_state_id),
+                'phone_number' => $st->phone_1,
+                'mobile_number' => $st->phone_2,
+                'email' => $st->email
+            ];
+        }
+        $id = $helper->qpCreatePayment($paymentsData);
         $result = $helper->qpCreatePaymentLink($id->id, $post_variables);
         $paymentUrl = $result->url;
 
