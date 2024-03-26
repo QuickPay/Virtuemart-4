@@ -76,11 +76,8 @@ class QuickpayHelper {
 	/**
 	 * Create a payment at the quickpay gateway
 	 */
-	function qpCreatePayment($orderid, $currency) {
-		$postArray = array();
-		$postArray['order_id'] = $orderid;
-		$postArray['currency'] = $currency;
-		$result = $this->request('payments', $postArray,"");
+	function qpCreatePayment($data) {
+		$result = $this->request('payments', $data,"");
 		$result = json_decode($result);
 		return $result;
 	}
